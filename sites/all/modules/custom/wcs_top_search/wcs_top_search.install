@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Install "wcs_top_search" wcs_top_search.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function wcs_top_search_schema() {
+  $schema['wcs_top_search'] = array(
+    'description' => 'Stores counts of keywords from search.',
+    'fields' => array(
+      'keyword' => array(
+        'description' => 'The keywords from search.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+
+      'count' => array(
+        'desctiption' => 'How many count?',
+        'type' => 'int',
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('keyword'), 
+  );
+
+  return $schema;
+}
+
+

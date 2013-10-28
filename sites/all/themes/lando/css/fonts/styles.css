@@ -1,0 +1,8 @@
+
+@font-face {
+	font-family: 'CplKirkwood';
+	src: url('CplKirkwood.eot?') format('eot'), 
+	     url('CplKirkwood.woff') format('woff'), 
+	     url('CplKirkwood.ttf')  format('truetype'),
+	     url('CplKirkwood.svg#CplKirkwood') format('svg');
+}

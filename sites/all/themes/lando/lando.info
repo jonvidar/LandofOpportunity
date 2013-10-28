@@ -1,0 +1,52 @@
+
+name = LandofOpportunity
+description = LandofOpportunity theme.
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = css/jquery.jscrollpane.css
+stylesheets[all][] = css/chardinjs.css
+stylesheets[all][] = css/jquery.fancybox.css
+stylesheets[all][] = css/jquery.selectBox.css
+stylesheets[all][] = css/player.css
+stylesheets[all][] = css/animate.css
+stylesheets[all][] = css/style.css
+
+; Add a script
+scripts[] = js/lib/min/spin.min.js
+scripts[] = js/lib/min/jquery.cycle2.min.js
+scripts[] = js/lib/min/chardinjs.min.js
+scripts[] = js/lib/min/jquery.selectBox.min.js
+scripts[] = js/lib/min/jquery.jsort.min.js
+scripts[] = js/lib/min/jquery.jscrollpane.min.js
+scripts[] = js/lib/min/jquery.fancybox.min.js
+scripts[] = js/lib/min/popcorn-complete.min.js
+scripts[] = js/lib/jquery.scrollTo-1.4.3.1.js
+scripts[] = js/lib/jquery.infieldlabel.js
+scripts[] = js/lib/jquery.validate.js
+scripts[] = js/lib/textillate-master/jquery.textillate.js
+scripts[] = js/lib/textillate-master/assets/jquery.fittext.js
+scripts[] = js/lib/textillate-master/assets/jquery.lettering.js
+scripts[] = js/lib/skrollr.js
+scripts[] = js/lib/skrollr.menu.js
+scripts[] = js/lib/jquery.ba-throttle-debounce.js
+scripts[] = js/looplayer.js
+scripts[] = js/main.js
+
+regions[header] = Header
+regions[help] = Help
+regions[info] = Info
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[front_donate] = Front Page Donate
+regions[front_partners] = Front Page Partners
+
+regions[content] = Content
+regions[social_login] = Social Login
+
+regions[footer] = Footer
+
+settings[shortcut_module_link] = 0
+
+

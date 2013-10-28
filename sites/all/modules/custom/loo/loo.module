@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * LandofOpportunity custom module.
+ */
+
+require_once('loo.blocks.inc');
+require_once('loo.helpers.inc');
+require_once('loo.forms.inc');
+require_once('loo.hooks.inc');
+require_once('loo.search.inc');
+
+/**
+* Implements hook_menu().
+*/
+function loo_menu() {
+  $items = array();
+  
+  $items['tags/autocomplete'] = array(
+    'title' => 'Autocomplete for tags',
+    'page callback' => '_tags_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  
+  $items['loo/%node/comment-form'] = array(
+    'title' => 'Get comment form',
+    'page callback' => 'loo_get_comment_form',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  
+  $items['admin/config/user-interface/sharing-email'] = array(
+    'title' => 'Sharing email',
+    'description' => 'Email setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('loo_mail_settings'),
+    'access arguments' => array('administer nodes'),
+    'file' => 'loo.admin.inc',
+  );
+
+  $items['timeline'] = array(
+    'title' => 'Timeline',
+    'page callback' => 'loo_timeline',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  
+  return $items;
+  
+}
+/**
+* Implements hook_theme().
+*/
+function loo_theme() {
+  $items = array();
+  
+  $items['search_custom_page'] = array(
+    'template' => 'tpl/search_page',
+    'variables' => array(),
+  );
+  
+  $items['embed_code'] = array(
+    'template' => 'tpl/embed_code',
+    'variables' => array(),
+  );
+  
+  $items['iframe_code'] = array(
+    'template' => 'tpl/iframe_code',
+    'variables' => array(),
+  );
+
+  $items['timeline'] = array(
+    'template' => 'tpl/timeline',
+    'variables' => array(),
+  );
+  
+  return $items;
+  
+}
+/**
+* page callback for timeline
+*/
+function loo_timeline() {
+  $output = theme('timeline');
+  return $output;
+}
+
+/**
+*  return cooment form to node
+*/
+
+function loo_get_comment_form($node) {
+  global $user;
+  $output = '';
+  if ($user->uid <> 0) {
+    $comment_form = drupal_get_form("comment_node_{$node->type}_form", (object) array('nid' => $node->nid));
+    $output = render($comment_form);
+  }
+  echo $output;
+  die();
+}
