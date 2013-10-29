@@ -97,7 +97,7 @@ function landofopp_timeline() {
 }
 
 /**
-*  Return cooment form to node
+*  Return comment form to node
 */
 
 function landofopp_get_comment_form($node) {
