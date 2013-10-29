@@ -1,0 +1,5 @@
+name = LandofOpportunity module
+description = LandofOpportunity custom module.
+package = LandofOpportunity
+core = 7.x
+version = "7.1"

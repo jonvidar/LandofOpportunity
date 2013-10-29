@@ -1,0 +1,156 @@
+<?php
+
+/**
+ * @file
+ * LandofOpportunity custom module.
+ */
+
+require_once('landofopp.blocks.inc');
+require_once('landofopp.helpers.inc');
+require_once('landofopp.forms.inc');
+require_once('landofopp.hooks.inc');
+require_once('landofopp.search.inc');
+
+/**
+* Implements hook_menu().
+*/
+function landofopp_menu() {
+  $items = array();
+  
+  $items['tags/autocomplete'] = array(
+    'title' => 'Autocomplete for tags',
+    'page callback' => '_tags_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  
+  $items['loo/%node/comment-form'] = array(
+    'title' => 'Get comment form',
+    'page callback' => 'landofopp_get_comment_form',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  
+  $items['admin/config/user-interface/sharing-email'] = array(
+    'title' => 'Sharing email',
+    'description' => 'Email setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('landofopp_mail_settings'),
+    'access arguments' => array('administer nodes'),
+    'file' => 'landofopp.admin.inc',
+  );
+
+  $items['timeline'] = array(
+    'title' => 'Timeline',
+    'page callback' => 'landofopp_timeline',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  
+  $items['related-search/json'] = array(
+    'title' => 'Related search',
+    'page callback' => 'landofopp_top_search_related',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK ,
+  );
+  
+  return $items;
+  
+}
+/**
+* Implements hook_theme().
+*/
+function landofopp_theme() {
+  $items = array();
+  
+  $items['search_custom_page'] = array(
+    'template' => 'tpl/search_page',
+    'variables' => array(),
+  );
+  
+  $items['embed_code'] = array(
+    'template' => 'tpl/embed_code',
+    'variables' => array(),
+  );
+  
+  $items['iframe_code'] = array(
+    'template' => 'tpl/iframe_code',
+    'variables' => array(),
+  );
+
+  $items['timeline'] = array(
+    'template' => 'tpl/timeline',
+    'variables' => array(),
+  );
+  
+  
+  return $items;
+  
+}
+/**
+* page callback for timeline
+*/
+function landofopp_timeline() {
+  $output = theme('timeline');
+  return $output;
+}
+
+/**
+*  return cooment form to node
+*/
+
+function landofopp_get_comment_form($node) {
+  global $user;
+  $output = '';
+  if ($user->uid <> 0) {
+    $comment_form = drupal_get_form("comment_node_{$node->type}_form", (object) array('nid' => $node->nid));
+    $output = render($comment_form);
+  }
+  echo $output;
+  die();
+}
+
+/**
+ * Update count in loo_top_search table.
+ */
+function landofopp_top_search_update($keyword) {
+  if (empty($keyword)) return;
+  
+  // get count from keyword;
+  $results = db_query("SELECT count FROM {loo_top_search} WHERE keyword = :keyword", array(':keyword' => $keyword))->fetchAll();
+  
+  $count = 0;
+  foreach ($results as $result) {
+    $count = $result->count;
+  }
+  
+  $count++;
+  
+  $fields = array(
+    'keyword' => $keyword,
+    'count' => $count,
+  );
+  // update count in wcs_top_search table
+  db_merge('loo_top_search')
+    ->key(array('keyword' => $keyword))
+    ->fields($fields)
+    ->execute();
+
+}
+/**
+ * Return JSON output from related search.
+ */
+function landofopp_top_search_related() {
+  $string = @$_REQUEST['keywords'];
+  $results = array('keywords' => array());
+  
+  // Related  keywords
+  $result = db_select('loo_top_search')->fields('loo_top_search', array('keyword'))
+          ->condition('keyword', db_like($string) . '%', 'LIKE')
+          ->execute()->fetchCol();
+
+  $results['keywords'] = $result;
+  
+  drupal_json_output($results);
+}

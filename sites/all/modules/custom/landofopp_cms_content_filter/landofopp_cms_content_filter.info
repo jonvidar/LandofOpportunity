@@ -1,0 +1,5 @@
+name = LandofOpportunity Content Filter
+description = Add filters by content type.
+package = LandofOpportunity
+core = 7.x
+version = "7.1"
