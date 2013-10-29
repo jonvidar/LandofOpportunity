@@ -112,7 +112,7 @@ var RMVplayer = (function ($) {
     
   }
   
-  // function return time sting from seconds
+  // function return time string in seconds
   function secondsToHms(d) {
     d = Number(d);
     var h = Math.floor(d / 3600);
@@ -125,7 +125,7 @@ var RMVplayer = (function ($) {
   }
 
 
-  // add new trigger when pause the video
+  // add new trigger when video is paused
   function addNewTrigger(){
     var time = video.roundTime();
     

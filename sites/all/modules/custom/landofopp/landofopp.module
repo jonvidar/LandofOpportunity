@@ -89,7 +89,7 @@ function landofopp_theme() {
   
 }
 /**
-* page callback for timeline
+* Page callback for timeline
 */
 function landofopp_timeline() {
   $output = theme('timeline');
@@ -97,7 +97,7 @@ function landofopp_timeline() {
 }
 
 /**
-*  return cooment form to node
+*  Return cooment form to node
 */
 
 function landofopp_get_comment_form($node) {

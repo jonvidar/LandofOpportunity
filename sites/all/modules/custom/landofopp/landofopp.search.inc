@@ -129,7 +129,7 @@ function landofopp_search_execute($keys = NULL, $conditions = NULL) {
   return $results;
 }
 /**
-* get promote categories.
+* Get promoted categories.
 * 
 */
 function landofopp_get_promoted_categories() {
