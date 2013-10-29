@@ -12,11 +12,12 @@
 					<div class="question">
 						<div class="timeline-top">
 							<h2>Sandy</h2>
-							<img class="bg" width="1024" height="337" src="<?php echo base_path(); ?>sites/all/themes/lando/images/img/timeline-top.jpg" alt="" />
+							
+							<img class="bg" width="1024" height="337" src="<?php echo drupal_get_path('theme', 'landofopportunity'); ?>/images/img/timeline-top.jpg" alt="" />
 						</div>
 						<div class="timeline-bottom">
 							<h2>Katrina</h2>
-							<img class="bg" width="1024" height="337" src="<?php echo base_path(); ?>sites/all/themes/lando/images/img/timeline-bottom.jpg" alt="" />
+							<img class="bg" width="1024" height="337" src="<?php echo drupal_get_path('theme', 'landofopportunity'); ?>/images/img/timeline-bottom.jpg" alt="" />
 						</div>
 						<div class="text-wrapper">
 							<div class="text">
@@ -34,7 +35,7 @@
 							 	  	print '<div class="sector"><h3>'.$term->name.'</h3></div>';
 							   	} 
 							?>				
-							<?php $event_dots = loo_get_events(); ?>
+							<?php $event_dots = landofopp_get_events(); ?>
 							<?php if(!empty($event_dots)):?>
 						    	<div class="dots">
 						             <?php

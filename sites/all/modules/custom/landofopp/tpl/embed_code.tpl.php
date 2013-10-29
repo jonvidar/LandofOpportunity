@@ -10,7 +10,7 @@
 	global $base_url;
 	$node_url = url('node/'.$node->nid,array('absolute'=>TRUE));
 
-	$image = loo_get_original_image($node);
+	$image = landofopp_get_original_image($node);
 	if (!empty($image)) {
 		$preview = theme_image_style(array('style_name' => 'embed', 'path' => $image['uri'],'width'=>$image['metadata']['width'],'height'=>$image['metadata']['height'],'attributes'=>array('style'=>'width:100%;')));
 	
